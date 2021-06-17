@@ -84,9 +84,6 @@ test('beforeSession', () => {
     service.beforeSession({}, {})
     expect(service['_isSupported']).toBe(false)
 
-    service.beforeSession({}, { browserName: 'firefox' })
-    expect(service['_isSupported']).toBe(false)
-
     // @ts-ignore test with outdated version capability
     service.beforeSession({}, { browserName: 'chrome', version: 62 })
     expect(service['_isSupported']).toBe(false)
@@ -100,6 +97,9 @@ test('beforeSession', () => {
 
     service.beforeSession({}, { browserName: 'chrome', browserVersion: '65' })
     expect(service['_isSupported']).toBe(true)
+
+    service.beforeSession({}, { browserName: 'firefox' })
+    expect(service['_isSupported']).toBe(false)
 })
 
 test('if not supported by browser', async () => {
